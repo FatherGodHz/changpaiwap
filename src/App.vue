@@ -5,12 +5,9 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex'
 
 export default {
-  name: 'App',
-  computed: {...mapGetters(['gettersMsg'])},
-  methods: {...mapActions(['changeMsg'])}
+  name: 'App'
 }
 </script>
 
