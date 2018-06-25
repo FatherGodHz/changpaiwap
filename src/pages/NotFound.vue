@@ -1,34 +1,39 @@
 <template>
   <div class="notfound">
-    <div class="error"></div>
-    <div class="etext">页面不存在！</div>
+    <div class="etext">啊啊啊~404黑洞出现了！<br>太倒霉了，万年一遇的黑洞被你碰上了！</div>
     <router-link to="/list">
-      <button class="backList">返回主页</button>
+      <button class="backList">返回首页</button>
     </router-link>
   </div>
 </template>
 
 <style lang="scss" scoped>
-  .error {
-    width: 200px;
-    height: 200px;
-    margin: 120px auto 10px auto;
-    background: url('../../static/error.png') -10px center no-repeat;
-    background-size: 100%;
+  .notfound {
+    width: 100%;
+    height: 100%;
+    background: url('../../static/error_bg.png') center top no-repeat #02a8ac;
+    background-size: contain;
   }
 
   .etext {
     text-align: center;
-    color: #555;
+    color: #fff;
+    width: 8.41rem;
+    font-size: 0.44rem;
+    line-height: 0.6rem;
+    margin: 0 auto;
+    padding-top: 9.21rem;
   }
 
   .backList {
-    margin: 2rem auto;
+    margin: 1.17rem auto 0 auto;
     width: 3rem;
     display: block;
     height: 1rem;
-    background-color: #fc7e7f;
-    color: #fff;
+    background-color: #fff;
+    color: #000;
     border: 0;
+    border-radius: 50px;
+    font-size: .38rem;
   }
 </style>
