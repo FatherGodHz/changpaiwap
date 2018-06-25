@@ -3,7 +3,7 @@
     <div class="login-logo">
       <img src="../../static/login_tit.png">
     </div>
-    <form class="login">
+    <form class="login" @submit.stop.prevent="login">
       <label>
         <i class="icon icon-user"></i>
         <input type="text" placeholder="请输入手机号">
@@ -12,7 +12,7 @@
         <i class="icon icon-password"></i>
         <input type="password" placeholder="请输入密码">
       </label>
-      <button class="btn-submit">登&nbsp;&nbsp;录</button>
+      <button class="btn-submit" type="submit">登&nbsp;&nbsp;录</button>
     </form>
   </div>
 </template>
@@ -21,7 +21,25 @@
 export default {
   name: 'Login',
   data () {
-    return {}
+    return {
+      msg: '',
+      token: ''
+    }
+  },
+  mounted () {
+    this.$store.commit('title', 'Login')
+  },
+  methods: {
+    login () {
+      console.log('OjbK')
+      if (this.token) {
+        this.$store.commit('login', this.token)
+        let redirect = decodeURIComponent(this.$route.query.redirect || '/')
+        this.$router.push({
+          path: redirect
+        })
+      }
+    }
   }
 }
 </script>
@@ -73,7 +91,7 @@ export default {
           height: 100%;
           float: left;
           margin-left: .48rem;
-          font-size:.41rem;
+          font-size: .41rem;
         }
       }
       .btn-submit {
