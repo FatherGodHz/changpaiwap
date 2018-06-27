@@ -1,20 +1,22 @@
 <template>
   <div class="tab-container">
-    <ul class="tab-title-container">
-      <li class="tab-title" v-for="(title,index) in tabPanels" :class="{'active': index+1===currentPage}" :key="index"
-          @click="setPage(index+1)">{{title}}
-      </li>
-    </ul>
-    <div v-if="slidable" class="tabswiper" :class="{'invisible':invisible}" @touchstart="_onTouchStart">
-      <div class="tabswiper-wrap" ref="tabswiper-wrap" :class="{'dragging': dragging}"
-           :style="{'transform' : 'translate3d(' + translateX + 'px,0, 0)'}" @transitionend="_onTransitionEnd">
-        <slot></slot>
+    <div class="tab-container-box">
+      <ul class="tab-title-container">
+        <li class="tab-title" v-for="(title,index) in tabPanels" :class="{'active': index+1===currentPage}" :key="index"
+            @click="setPage(index+1)">{{title}}
+        </li>
+      </ul>
+      <div v-if="slidable" class="tabswiper" :class="{'invisible':invisible}" @touchstart="_onTouchStart">
+        <div class="tabswiper-wrap" ref="tabswiper-wrap" :class="{'dragging': dragging}"
+             :style="{'transform' : 'translate3d(' + translateX + 'px,0, 0)'}" @transitionend="_onTransitionEnd">
+          <slot></slot>
+        </div>
       </div>
-    </div>
-    <div v-else class="tabswiper" :class="{'invisible':invisible}">
-      <div class="tabswiper-wrap" ref="tabswiper-wrap" :class="{'dragging': dragging}"
-           :style="{'transform' : 'translate3d(' + translateX + 'px,0, 0)'}" @transitionend="_onTransitionEnd">
-        <slot></slot>
+      <div v-else class="tabswiper" :class="{'invisible':invisible}">
+        <div class="tabswiper-wrap" ref="tabswiper-wrap" :class="{'dragging': dragging}"
+             :style="{'transform' : 'translate3d(' + translateX + 'px,0, 0)'}" @transitionend="_onTransitionEnd">
+          <slot></slot>
+        </div>
       </div>
     </div>
   </div>
@@ -232,10 +234,16 @@ export default {
 <style scoped lang="scss">
   .tab-container {
     width: 100%;
+    .tab-container-box {
+      width: 100%;
+      height: 100%;
+      position: relative;
+    }
     .tab-title-container {
+      position: absolute;
+      top: 0;
       width: 100%;
       display: flex;
-      position: relative;
       .tab-title {
         flex: 1;
         height: .95rem;
@@ -256,22 +264,17 @@ export default {
       visibility: hidden;
     }
     .tabswiper {
-      position: relative;
-      overflow: hidden;
+      position: absolute;
+      top: 1.25rem;
+      bottom: 0;
+      overflow-y: scroll;
       .tabswiper-wrap {
         display: flex;
         width: 100%;
         height: 100%;
+        overflow: hidden;
         transition: all 0.2s ease;
         flex-direction: row;
-        div {
-          overflow-x: hidden;
-          flex-shrink: 0;
-          width: 100%;
-          margin: 0;
-          padding: 0;
-          overflow-y: auto;
-        }
         .hide-height {
           height: 0;
         }

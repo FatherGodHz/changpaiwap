@@ -9,16 +9,16 @@
         <card :list="list"></card>
       </div>
       <div class="tab-content-container">
-        <div>2</div>
+        <card :list="list"></card>
       </div>
       <div class="tab-content-container">
-        <div>3</div>
+        <card :list="list"></card>
       </div>
       <div class="tab-content-container">
-        <div>4</div>
+        <card :list="list"></card>
       </div>
       <div class="tab-content-container">
-        <div>5</div>
+        <card :list="list"></card>
       </div>
     </tab>
   </div>
@@ -47,7 +47,44 @@ export default {
         name: '刘茗兮',
         court: '浙江省杭州市中级人民法院',
         phone: '15258092978'
-      }
+      },
+      list: [
+        {
+          title: '重庆市九龙坡区锦虹一路1号7幢11-3号的房屋',
+          image: '../../static/test.jpg',
+          status: 0
+        },
+        {
+          title: '重庆市九龙坡区锦虹一路1号7幢11-3号的房屋',
+          image: '../../static/test.jpg',
+          status: 1
+        },
+        {
+          title: '重庆市九龙坡区锦虹一路1号7幢11-3号的房屋',
+          image: '../../static/test.jpg',
+          status: 2
+        },
+        {
+          title: '重庆市九龙坡区锦虹一路1号7幢11-3号的房屋',
+          image: '../../static/test.jpg',
+          status: 3
+        },
+        {
+          title: '重庆市九龙坡区锦虹一路1号7幢11-3号的房屋',
+          image: '../../static/test.jpg',
+          status: 0
+        },
+        {
+          title: '重庆市九龙坡区锦虹一路1号7幢11-3号的房屋',
+          image: '../../static/test.jpg',
+          status: 0
+        },
+        {
+          title: '重庆市九龙坡区锦虹一路1号7幢11-3号的房屋',
+          image: '../../static/test.jpg',
+          status: 0
+        }
+      ]
     }
   }
 }
@@ -61,8 +98,8 @@ export default {
     position: relative;
     .user-header {
       position: fixed;
-      top:0;
-      left:0;
+      top: 0;
+      left: 0;
       width: 100%;
       height: 1.75rem;
       line-height: 1.75rem;
@@ -87,9 +124,8 @@ export default {
       position: fixed;
       top: 1.78rem;
       margin-top: .03rem;
+      bottom: 0;
       .tab-content-container {
-        height:100%;
-        overflow-y: auto;
       }
     }
   }

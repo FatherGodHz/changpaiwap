@@ -31,7 +31,6 @@ export default {
   },
   methods: {
     login () {
-      console.log('OjbK')
       if (this.token) {
         this.$store.commit('login', this.token)
         let redirect = decodeURIComponent(this.$route.query.redirect || '/')

@@ -5,6 +5,7 @@ import store from '../store/store'
 import Login from '@/pages/login'
 import List from '@/pages/List'
 import NotFound from '@/pages/NotFound'
+import Content from '@/pages/content'
 
 Vue.use(VueRouter)
 
@@ -21,6 +22,14 @@ const routes = [
       requireAuth: true
     },
     component: List
+  },
+  {
+    path: '/content/:id',
+    name: 'Content',
+    meta: {
+      requireAuth: true
+    },
+    component: Content
   },
   {
     path: '*',
