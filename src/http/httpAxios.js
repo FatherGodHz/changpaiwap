@@ -3,12 +3,12 @@ import store from '../store/store'
 import router from '../router'
 
 axios.defaults.timeout = 5000
-axios.defaults.baseURL = 'https://api.github.com'
+axios.defaults.baseURL = 'https://www.apple.com'
 
 axios.interceptors.request.use(
   config => {
     if (store.state.token) {
-      config.headers.Authorization = `token ${store.state.token}`
+      config.headers.Authorization = `Bearer ${store.state.token}`
     }
     return config
   },
@@ -28,12 +28,18 @@ axios.interceptors.response.use(
           store.commit('logout')
           router.currentRoute.path !== 'login' &&
           router.replace({
-            path: 'login',
+            path: '/login',
             query: {redirect: router.currentRoute.path}
           })
+          break
+        case 500:
+          router.replace({
+            path: '/login',
+            query: {redirect: router.currentRoute.path}
+          })
+          break
       }
     }
-    console.log(JSON.stringify(error))
     return Promise.reject(error.response.data)
   }
 )

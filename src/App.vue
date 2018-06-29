@@ -1,6 +1,8 @@
 <template>
   <div id="app">
-    <router-view/>
+    <transition :name="transitionName">
+      <router-view class="child-view"/>
+    </transition>
   </div>
 </template>
 
@@ -10,7 +12,16 @@ import { mapState } from 'vuex'
 export default {
   name: 'App',
   data () {
-    return {}
+    return {
+      transitionName: 'slide-left'
+    }
+  },
+  watch: {
+    '$route' (to, from) {
+      const toDepth = to.path.split('/').length
+      const fromDepth = from.path.split('/').length
+      this.transitionName = toDepth < fromDepth ? 'slide-right' : 'slide-left'
+    }
   },
   computed: mapState({
     title: state => state.title,

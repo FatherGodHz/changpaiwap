@@ -6,19 +6,19 @@
     </div>
     <tab :tabPanels="tabPanels" :current-page="3" :slidable="false" class="tab-box">
       <div class="tab-content-container">
-        <card :list="list"></card>
+        <card :list="list[0].list"></card>
       </div>
       <div class="tab-content-container">
-        <card :list="list"></card>
+        <card :list="list[1].list"></card>
       </div>
       <div class="tab-content-container">
-        <card :list="list"></card>
+        <card :list="list[2].list"></card>
       </div>
       <div class="tab-content-container">
-        <card :list="list"></card>
+        <card :list="list[3].list"></card>
       </div>
       <div class="tab-content-container">
-        <card :list="list"></card>
+        <card :list="list[4].list"></card>
       </div>
     </tab>
   </div>
@@ -27,6 +27,7 @@
 <script>
 import tab from '../components/vue-tab'
 import card from '../components/vue-card'
+import Axios from '../http/httpAxios'
 
 export default {
   name: 'Login',
@@ -44,47 +45,63 @@ export default {
         '股权'
       ],
       user: {
-        name: '刘茗兮',
-        court: '浙江省杭州市中级人民法院',
-        phone: '15258092978'
+        name: null,
+        court: null,
+        phone: null
       },
       list: [
-        {
-          title: '重庆市九龙坡区锦虹一路1号7幢11-3号的房屋',
-          image: '../../static/test.jpg',
-          status: 0
-        },
-        {
-          title: '重庆市九龙坡区锦虹一路1号7幢11-3号的房屋',
-          image: '../../static/test.jpg',
-          status: 1
-        },
-        {
-          title: '重庆市九龙坡区锦虹一路1号7幢11-3号的房屋',
-          image: '../../static/test.jpg',
-          status: 2
-        },
-        {
-          title: '重庆市九龙坡区锦虹一路1号7幢11-3号的房屋',
-          image: '../../static/test.jpg',
-          status: 3
-        },
-        {
-          title: '重庆市九龙坡区锦虹一路1号7幢11-3号的房屋',
-          image: '../../static/test.jpg',
-          status: 0
-        },
-        {
-          title: '重庆市九龙坡区锦虹一路1号7幢11-3号的房屋',
-          image: '../../static/test.jpg',
-          status: 0
-        },
-        {
-          title: '重庆市九龙坡区锦虹一路1号7幢11-3号的房屋',
-          image: '../../static/test.jpg',
-          status: 0
-        }
+        [],
+        [],
+        [],
+        [],
+        []
       ]
+    }
+  },
+  created () {
+    this.getCategory()
+    this.getList()
+    this.getUser()
+  },
+  methods: {
+    getUser () {
+      let self = this
+      Axios({
+        method: 'get',
+        url: '/api/judge/user',
+        withCredentials: false
+      }).then(function (response) {
+        self.user = response.data
+      })
+        .catch(function (error) {
+          alert(error.message)
+        })
+    },
+    getCategory () {
+      let self = this
+      Axios({
+        method: 'get',
+        url: '/api/judge/index',
+        withCredentials: false
+      }).then(function (response) {
+        self.tabPanels = response.data.data
+      })
+        .catch(function (error) {
+          alert(error.message)
+        })
+    },
+    getList () {
+      let self = this
+      Axios({
+        method: 'get',
+        url: '/api/judge/index/list',
+        withCredentials: false
+      }).then(function (response) {
+        self.list = response.data.data
+      })
+        .catch(function (error) {
+          alert(error.message)
+        })
     }
   }
 }

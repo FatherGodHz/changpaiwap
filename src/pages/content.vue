@@ -12,119 +12,11 @@
             <li>预约码</li>
           </ul>
           <ul class="con-box">
-            <li>
-              <span>张晓晓</span>
-              <span>15258092978</span>
-              <span>2015-08-20 10:00</span>
-              <span>4523</span>
-            </li>
-            <li>
-              <span>张晓晓</span>
-              <span>15258092978</span>
-              <span>2015-08-20 10:00</span>
-              <span>4523</span>
-            </li>
-            <li>
-              <span>张晓晓</span>
-              <span>15258092978</span>
-              <span>2015-08-20 10:00</span>
-              <span>4523</span>
-            </li>
-            <li>
-              <span>张晓晓</span>
-              <span>15258092978</span>
-              <span>2015-08-20 10:00</span>
-              <span>4523</span>
-            </li>
-            <li>
-              <span>张晓晓</span>
-              <span>15258092978</span>
-              <span>2015-08-20 10:00</span>
-              <span>4523</span>
-            </li>
-            <li>
-              <span>张晓晓</span>
-              <span>15258092978</span>
-              <span>2015-08-20 10:00</span>
-              <span>4523</span>
-            </li>
-            <li>
-              <span>张晓晓</span>
-              <span>15258092978</span>
-              <span>2015-08-20 10:00</span>
-              <span>4523</span>
-            </li>
-            <li>
-              <span>张晓晓</span>
-              <span>15258092978</span>
-              <span>2015-08-20 10:00</span>
-              <span>4523</span>
-            </li>
-            <li>
-              <span>张晓晓</span>
-              <span>15258092978</span>
-              <span>2015-08-20 10:00</span>
-              <span>4523</span>
-            </li>
-            <li>
-              <span>张晓晓</span>
-              <span>15258092978</span>
-              <span>2015-08-20 10:00</span>
-              <span>4523</span>
-            </li>
-            <li>
-              <span>张晓晓</span>
-              <span>15258092978</span>
-              <span>2015-08-20 10:00</span>
-              <span>4523</span>
-            </li>
-            <li>
-              <span>张晓晓</span>
-              <span>15258092978</span>
-              <span>2015-08-20 10:00</span>
-              <span>4523</span>
-            </li>
-            <li>
-              <span>张晓晓</span>
-              <span>15258092978</span>
-              <span>2015-08-20 10:00</span>
-              <span>4523</span>
-            </li>
-            <li>
-              <span>张晓晓</span>
-              <span>15258092978</span>
-              <span>2015-08-20 10:00</span>
-              <span>4523</span>
-            </li>
-            <li>
-              <span>张晓晓</span>
-              <span>15258092978</span>
-              <span>2015-08-20 10:00</span>
-              <span>4523</span>
-            </li>
-            <li>
-              <span>张晓晓</span>
-              <span>15258092978</span>
-              <span>2015-08-20 10:00</span>
-              <span>4523</span>
-            </li>
-            <li>
-              <span>张晓晓</span>
-              <span>15258092978</span>
-              <span>2015-08-20 10:00</span>
-              <span>4523</span>
-            </li>
-            <li>
-              <span>张晓晓</span>
-              <span>15258092978</span>
-              <span>2015-08-20 10:00</span>
-              <span>4523</span>
-            </li>
-            <li>
-              <span>张晓晓</span>
-              <span>15258092978</span>
-              <span>2015-08-20 10:00</span>
-              <span>4523</span>
+            <li v-for="(item,index) in users" :key="index">
+              <span>{{item.name}}</span>
+              <span>{{item.phone}}</span>
+              <span>{{item.time}}</span>
+              <span>{{item.code}}</span>
             </li>
           </ul>
         </div>
@@ -135,103 +27,24 @@
       <div class="box">
         <i class="icon-close" v-on:click="DialogDhly = false"></i>
         <div class="dhly-box">
+          <embed height="100" width="100%" src="https://apple.com/storage/2018/06/29/0852/49e70a9797055a72d200fdb1dd354914.mp3" />
           <ul class="title-box">
             <li>姓名</li>
             <li>录音时间</li>
             <li>录音</li>
           </ul>
           <ul class="con-box">
-            <li>
-              <span>张晓晓</span>
-              <span>2015-08-20 10:00</span>
-              <span></span>
-            </li>
-            <li>
-              <span>张晓晓</span>
-              <span>2015-08-20 10:00</span>
-              <span></span>
-            </li>
-            <li>
-              <span>张晓晓</span>
-              <span>2015-08-20 10:00</span>
-              <span></span>
-            </li>
-            <li>
-              <span>张晓晓</span>
-              <span>2015-08-20 10:00</span>
-              <span></span>
-            </li>
-            <li>
-              <span>张晓晓</span>
-              <span>2015-08-20 10:00</span>
-              <span></span>
-            </li>
-            <li>
-              <span>张晓晓</span>
-              <span>2015-08-20 10:00</span>
-              <span></span>
-            </li>
-            <li>
-              <span>张晓晓</span>
-              <span>2015-08-20 10:00</span>
-              <span></span>
-            </li>
-            <li>
-              <span>张晓晓</span>
-              <span>2015-08-20 10:00</span>
-              <span></span>
-            </li>
-            <li>
-              <span>张晓晓</span>
-              <span>2015-08-20 10:00</span>
-              <span></span>
-            </li>
-            <li>
-              <span>张晓晓</span>
-              <span>2015-08-20 10:00</span>
-              <span></span>
-            </li>
-            <li>
-              <span>张晓晓</span>
-              <span>2015-08-20 10:00</span>
-              <span></span>
-            </li>
-            <li>
-              <span>张晓晓</span>
-              <span>2015-08-20 10:00</span>
-              <span></span>
-            </li>
-            <li>
-              <span>张晓晓</span>
-              <span>2015-08-20 10:00</span>
-              <span></span>
-            </li>
-            <li>
-              <span>张晓晓</span>
-              <span>2015-08-20 10:00</span>
-              <span></span>
-            </li>
-            <li>
-              <span>张晓晓</span>
-              <span>2015-08-20 10:00</span>
-              <span></span>
-            </li>
-            <li>
-              <span>张晓晓</span>
-              <span>2015-08-20 10:00</span>
-              <span></span>
-            </li>
-            <li>
-              <span>张晓晓</span>
-              <span>2015-08-20 10:00</span>
-              <span></span>
+            <li v-for="(item,index) in content.recordings" :key="index">
+              <span>{{item.name}}</span>
+              <span>{{item.time}}</span>
+              <span @click="listenMusic(item.file)"></span>
             </li>
           </ul>
         </div>
       </div>
     </div>
     <div class="title">
-      重庆市九龙坡区锦虹一路1号7幢11-3号的房屋{{$route.params.id}}
+      {{content.title}}
     </div>
     <div class="container-first">
       <div class="yyqk box" v-on:click="DialogYyqk = true">
@@ -244,36 +57,89 @@
       </div>
     </div>
     <div class="container-second">
-      <i></i><b>钥匙情况：</b><span>钥匙入库</span>
+      <i></i><b>钥匙情况：</b><span>{{keyStatus[content.key_situation]}}</span>
     </div>
-    <div class="container-third">
+    <div class="container-third" v-if="content.tree_id === 2">
       <i></i>
       <div class="box">
         <div class="tit">车辆情况</div>
-        <div class="son"><span>车辆出库时间：</span><span>2018-06-26 11:15</span></div>
-        <div class="son"><span>车辆入库时间：</span><span>2018-06-28 11:15</span></div>
+        <div class="son"><span>车辆出库时间：</span><span>{{content.storage_time}}</span></div>
+        <div class="son"><span>车辆入库时间：</span><span>{{content.outbound_time}}</span></div>
         <div class="son">
-          <span>天&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;数：</span><span>2天</span>
+          <span>天&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;数：</span><span>{{day}}天</span>
         </div>
       </div>
     </div>
     <div class="container-fourth" v-on:click="changeHandlingStatus">
-      房产是否要搬运 （是）
+      房产是否要搬运 （未处理）
     </div>
   </div>
 </template>
 
 <script>
+import Axios from '../http/httpAxios'
+
 export default {
   data () {
     return {
       DialogYyqk: false,
-      DialogDhly: false
+      DialogDhly: false,
+      isShowMusic: false,
+      users: {},
+      day: '&',
+      HandlingStatus: [
+        '未处理',
+        '是',
+        '否'
+      ],
+      keyStatus: [
+        '暂无情况',
+        '钥匙入库',
+        '钥匙出库',
+        '钥匙使用',
+        '钥匙归还'
+      ],
+      content: {}
     }
   },
+  watch: {
+    content: function (item) {
+      let self = this
+      if (item.storage_time != null && item.outbound_time != null) {
+        let date1 = Date.parse(item.storage_time)
+        let date2 = Date.parse(item.outbound_time)
+        self.day = ((date2 - date1) / (24 * 60 * 60 * 1000)).toFixed(2)
+      }
+    }
+  },
+  created () {
+    this.getContent()
+  },
   methods: {
+    listenMusic (url) {
+      let self = this
+      if (self.isShowMusic) {
+        console.log(url)
+      } else {
+        console.log(url)
+      }
+    },
+    getContent () {
+      let self = this
+      let id = this.$route.params.id
+      Axios({
+        method: 'get',
+        url: '/api/judge/content/' + id,
+        withCredentials: false
+      }).then(function (response) {
+        self.content = response.data.data
+        self.users = response.data.user
+      })
+        .catch(function (error) {
+          alert(error.message)
+        })
+    },
     changeHandlingStatus () {
-      console.log('1')
     }
   }
 }
@@ -298,7 +164,6 @@ export default {
       .box {
         width: 100%;
         height: 100%;
-
         position: relative;
         .icon-close {
           background: url("../../static/icon_close.png") center top no-repeat;

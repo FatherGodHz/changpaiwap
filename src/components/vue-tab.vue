@@ -2,9 +2,7 @@
   <div class="tab-container">
     <div class="tab-container-box">
       <ul class="tab-title-container">
-        <li class="tab-title" v-for="(title,index) in tabPanels" :class="{'active': index+1===currentPage}" :key="index"
-            @click="setPage(index+1)">{{title}}
-        </li>
+        <li class="tab-title" v-for="(item,index) in tabPanels" :class="{'active': index+1===currentPage}" :key="index" @click="setPage(index+1)">{{item.title}}</li>
       </ul>
       <div v-if="slidable" class="tabswiper" :class="{'invisible':invisible}" @touchstart="_onTouchStart">
         <div class="tabswiper-wrap" ref="tabswiper-wrap" :class="{'dragging': dragging}"

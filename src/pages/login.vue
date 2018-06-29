@@ -6,11 +6,11 @@
     <form class="login" @submit.stop.prevent="login">
       <label>
         <i class="icon icon-user"></i>
-        <input type="text" placeholder="请输入手机号">
+        <input type="tel" v-model="username" placeholder="请输入手机号">
       </label>
       <label>
         <i class="icon icon-password"></i>
-        <input type="password" placeholder="请输入密码">
+        <input type="password" v-model="password" placeholder="请输入密码">
       </label>
       <button class="btn-submit" type="submit">登&nbsp;&nbsp;录</button>
     </form>
@@ -18,10 +18,15 @@
 </template>
 
 <script>
+import Axios from '../http/httpAxios'
+import Qs from 'qs'
+
 export default {
   name: 'Login',
   data () {
     return {
+      username: '',
+      password: '',
       msg: '',
       token: ''
     }
@@ -31,13 +36,32 @@ export default {
   },
   methods: {
     login () {
-      if (this.token) {
-        this.$store.commit('login', this.token)
-        let redirect = decodeURIComponent(this.$route.query.redirect || '/')
-        this.$router.push({
-          path: redirect
+      let self = this
+      Axios({
+        method: 'post',
+        url: 'https://www.apple.com/api/judge/authorizations',
+        baseURL: 'https://www.apple.com/api/judge/authorizations',
+        data: {
+          username: this.username,
+          password: this.password
+        },
+        transformRequest: [function (data) {
+          data = Qs.stringify(data)
+          return data
+        }],
+        withCredentials: false
+      }).then(function (response) {
+        if (response.data.access_token) {
+          self.$store.commit('login', response.data.access_token)
+          let redirect = decodeURIComponent(self.$route.query.redirect || '/')
+          self.$router.push({
+            path: redirect
+          })
+        }
+      })
+        .catch(function (error) {
+          alert(error.message)
         })
-      }
     }
   }
 }

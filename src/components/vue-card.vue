@@ -1,12 +1,14 @@
 <template>
   <div class="card-box">
     <div class="card" v-for="(item,index) in list" :key="index">
-      <img :src="item.image">
-      <div class="info">
-        <div class="title">{{item.title}}</div>
-        <div class="status">{{status[item.status]}}</div>
-        <div class="button">查看详情</div>
-      </div>
+      <router-link :to="{ name: 'Content', params: { id: item.id }}">
+        <img :src="'https://apple.com/'+item.image">
+        <div class="info">
+          <div class="title">{{item.title}}</div>
+          <div class="status">{{status[item.status]}}</div>
+          <div class="button">查看详情</div>
+        </div>
+      </router-link>
     </div>
   </div>
 </template>
@@ -21,10 +23,10 @@ export default {
   data () {
     return {
       status: [
+        '排期中',
         '可预约',
-        '预约已结束',
-        '拍卖结束',
-        '看样排期中'
+        '预约结束',
+        '拍卖结束'
       ]
     }
   }
