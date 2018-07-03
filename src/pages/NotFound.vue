@@ -1,7 +1,7 @@
 <template>
   <div class="notfound">
     <div class="etext">啊啊啊~404黑洞出现了！<br>太倒霉了，万年一遇的黑洞被你碰上了！</div>
-    <router-link to="/list">
+    <router-link to="/">
       <button class="backList">返回首页</button>
     </router-link>
   </div>

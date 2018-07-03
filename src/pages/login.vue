@@ -18,8 +18,8 @@
 </template>
 
 <script>
-import Axios from '../http/httpAxios'
 import Qs from 'qs'
+import Axios from '../http/httpAxios'
 
 export default {
   name: 'Login',
@@ -39,8 +39,7 @@ export default {
       let self = this
       Axios({
         method: 'post',
-        url: 'https://www.apple.com/api/judge/authorizations',
-        baseURL: 'https://www.apple.com/api/judge/authorizations',
+        url: '/api/judge/authorizations',
         data: {
           username: this.username,
           password: this.password
@@ -60,7 +59,7 @@ export default {
         }
       })
         .catch(function (error) {
-          alert(error.message)
+          self.$vux.toast.text(error.message, 'middle')
         })
     }
   }

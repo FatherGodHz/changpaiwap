@@ -4,40 +4,37 @@
       <span class="user-name">{{user.name}}</span><span class="user-court">{{user.court}}</span><span
       class="user-phone">({{user.phone}})</span>
     </div>
-    <tab :tabPanels="tabPanels" :current-page="3" :slidable="false" class="tab-box">
-      <div class="tab-content-container">
-        <card :list="list[0].list"></card>
-      </div>
-      <div class="tab-content-container">
-        <card :list="list[1].list"></card>
-      </div>
-      <div class="tab-content-container">
-        <card :list="list[2].list"></card>
-      </div>
-      <div class="tab-content-container">
-        <card :list="list[3].list"></card>
-      </div>
-      <div class="tab-content-container">
-        <card :list="list[4].list"></card>
-      </div>
+    <tab :line-width=0 active-color='#3eb2c9' bar-active-color="#ffffff" v-model="index">
+      <tab-item class="vux-center" v-for="(item, index) in list2" :key="index">{{item}}</tab-item>
     </tab>
+    <swiper v-model="index" height="auto" :show-dots="false">
+      <swiper-item v-for="(item, index) in list2" :key="index">
+        <div class="tab-swiper vux-center">
+          <card :list="list[index].list"></card>
+        </div>
+      </swiper-item>
+    </swiper>
   </div>
 </template>
 
 <script>
-import tab from '../components/vue-tab'
-import card from '../components/vue-card'
 import Axios from '../http/httpAxios'
+import card from '../components/vue-card'
+import { Tab, TabItem, Swiper, SwiperItem } from 'vux'
 
 export default {
   name: 'Login',
   components: {
-    tab,
-    card
+    card,
+    Tab,
+    TabItem,
+    Swiper,
+    SwiperItem
   },
   data () {
     return {
-      tabPanels: [
+      index: 0,
+      list2: [
         '房产',
         '机动车',
         '土地',
@@ -50,6 +47,12 @@ export default {
         phone: null
       },
       list: [
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
         [],
         [],
         [],
@@ -74,7 +77,7 @@ export default {
         self.user = response.data
       })
         .catch(function (error) {
-          alert(error.message)
+          self.$vux.toast.text(error.message, 'middle')
         })
     },
     getCategory () {
@@ -87,7 +90,7 @@ export default {
         self.tabPanels = response.data.data
       })
         .catch(function (error) {
-          alert(error.message)
+          self.$vux.toast.text(error.message, 'middle')
         })
     },
     getList () {
@@ -100,7 +103,7 @@ export default {
         self.list = response.data.data
       })
         .catch(function (error) {
-          alert(error.message)
+          self.$vux.toast.text(error.message, 'middle')
         })
     }
   }
@@ -137,13 +140,57 @@ export default {
         color: #828282;
       }
     }
-    .tab-box {
+    .vux-tab-wrap {
       position: fixed;
+      width: 100%;
       top: 1.78rem;
-      margin-top: .03rem;
+      height: .95rem;
+      padding: 0;
+      .vux-tab-selected {
+        font-weight: bold;
+      }
+      .vux-tab-item {
+        background: #fff;
+        line-height: .95rem;
+        font-size: .38rem;
+        color: #000;
+      }
+      .vux-tab-item:not(:last-child) {
+        margin-right: .03rem;
+      }
+    }
+    .vux-slider {
+      position: fixed;
+      top: 3.05rem;
       bottom: 0;
-      .tab-content-container {
+      width: 100%;
+      .vux-swiper-item {
+        overflow-y: scroll;
+        -webkit-overflow-scrolling: touch;
+      }
+      ::-webkit-scrollbar {
+        display: none;
       }
     }
   }
+
+</style>
+<style>
+  .list-box .vux-tab-container {
+    height: .95rem;
+  }
+
+  .vux-swiper {
+    height: 100% !important;
+  }
+
+  .list-box .scrollable {
+    padding-bottom: 0;
+  }
+
+  .list-box .vux-tab {
+    background: none;
+    height: .95rem;
+  }
+
 </style>

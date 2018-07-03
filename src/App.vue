@@ -7,7 +7,11 @@
 </template>
 
 <script>
+import Vue from 'vue'
 import { mapState } from 'vuex'
+import { ToastPlugin } from 'vux'
+
+Vue.use(ToastPlugin)
 
 export default {
   name: 'App',
@@ -38,7 +42,9 @@ export default {
 }
 </script>
 
-<style>
+<style lang="less">
+  @import '~vux/src/styles/reset.less';
+
   html, body {
     height: 100%;
   }

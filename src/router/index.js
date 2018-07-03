@@ -16,7 +16,7 @@ const routes = [
     component: Login
   },
   {
-    path: '/list',
+    path: '/',
     name: 'List',
     meta: {
       requireAuth: true

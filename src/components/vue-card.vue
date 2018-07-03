@@ -2,7 +2,7 @@
   <div class="card-box">
     <div class="card" v-for="(item,index) in list" :key="index">
       <router-link :to="{ name: 'Content', params: { id: item.id }}">
-        <img :src="'https://apple.com/'+item.image">
+        <img :src="'https://www.wzchangpai.com/'+item.image">
         <div class="info">
           <div class="title">{{item.title}}</div>
           <div class="status">{{status[item.status]}}</div>

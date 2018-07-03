@@ -27,7 +27,7 @@
       <div class="box">
         <i class="icon-close" v-on:click="DialogDhly = false"></i>
         <div class="dhly-box">
-          <embed height="100" width="100%" src="https://apple.com/storage/2018/06/29/0852/49e70a9797055a72d200fdb1dd354914.mp3" />
+          <!--<embed height="100" width="100%" src="https://apple.com/storage/2018/06/29/0852/49e70a9797055a72d200fdb1dd354914.mp3"/>-->
           <ul class="title-box">
             <li>姓名</li>
             <li>录音时间</li>
@@ -136,7 +136,7 @@ export default {
         self.users = response.data.user
       })
         .catch(function (error) {
-          alert(error.message)
+          self.$vux.toast.text(error.message, 'middle')
         })
     },
     changeHandlingStatus () {

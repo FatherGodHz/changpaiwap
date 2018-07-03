@@ -3,7 +3,7 @@ import store from '../store/store'
 import router from '../router'
 
 axios.defaults.timeout = 5000
-axios.defaults.baseURL = 'https://www.apple.com'
+axios.defaults.baseURL = 'https://www.wzchangpai.com/'
 
 axios.interceptors.request.use(
   config => {
