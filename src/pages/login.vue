@@ -27,8 +27,7 @@ export default {
     return {
       username: '',
       password: '',
-      msg: '',
-      token: ''
+      msg: ''
     }
   },
   mounted () {
@@ -51,7 +50,7 @@ export default {
         withCredentials: false
       }).then(function (response) {
         if (response.data.access_token) {
-          self.$store.commit('login', response.data.access_token)
+          self.$store.commit('login', response.data)
           let redirect = decodeURIComponent(self.$route.query.redirect || '/')
           self.$router.push({
             path: redirect

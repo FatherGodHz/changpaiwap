@@ -9,9 +9,10 @@
 <script>
 import Vue from 'vue'
 import { mapState } from 'vuex'
-import { ToastPlugin } from 'vux'
+import { ToastPlugin, LoadingPlugin } from 'vux'
 
 Vue.use(ToastPlugin)
+Vue.use(LoadingPlugin)
 
 export default {
   name: 'App',
@@ -29,15 +30,10 @@ export default {
   },
   computed: mapState({
     title: state => state.title,
-    token: state => state.token
+    access_token: state => state.access_token
   }),
   methods: {
-    logout () {
-      this.$store.commit('logout')
-      this.$router.push({
-        path: '/login'
-      })
-    }
+
   }
 }
 </script>

@@ -1,8 +1,27 @@
 <template>
   <div class="list-box">
+    <div v-transfer-dom>
+      <x-dialog v-model="isChangePassword" class="dialog-demo" hide-on-blur>
+        <div class="img-box">
+          <group title="密码修改">
+            <x-input title="请输入密码" type="text" placeholder="" v-model="password" :min="6" :max="12"></x-input>
+            <x-input title="请确认密码" v-model="password2" type="text" placeholder="" :equal-with="password"></x-input>
+          </group>
+          <div @click="changePwd">
+            <x-button type="warn">确认修改</x-button>
+          </div>
+        </div>
+        <div @click="isChangePassword = false">
+          <span class="vux-close"></span>
+        </div>
+      </x-dialog>
+    </div>
     <div class="user-header">
       <span class="user-name">{{user.name}}</span><span class="user-court">{{user.court}}</span><span
       class="user-phone">({{user.phone}})</span>
+    </div>
+    <div class="user-changeInfo">
+      <span class="changePwd" @click="isChangePassword = true">修改密码</span><span class="logout" @click="logout">退出</span>
     </div>
     <tab :line-width=0 active-color='#3eb2c9' bar-active-color="#ffffff" v-model="index">
       <tab-item class="vux-center" v-for="(item, index) in list2" :key="index">{{item}}</tab-item>
@@ -20,19 +39,41 @@
 <script>
 import Axios from '../http/httpAxios'
 import card from '../components/vue-card'
-import { Tab, TabItem, Swiper, SwiperItem } from 'vux'
+import {
+  Tab,
+  TabItem,
+  Swiper,
+  SwiperItem,
+  XDialog,
+  TransferDomDirective as TransferDom,
+  XInput,
+  Group,
+  XButton,
+  Cell
+} from 'vux'
 
 export default {
-  name: 'Login',
+  name: 'List',
+  directives: {
+    TransferDom
+  },
   components: {
     card,
     Tab,
     TabItem,
     Swiper,
-    SwiperItem
+    SwiperItem,
+    XDialog,
+    XInput,
+    Group,
+    XButton,
+    Cell
   },
   data () {
     return {
+      isChangePassword: false,
+      password: '',
+      password2: '',
       index: 0,
       list2: [
         '房产',
@@ -67,6 +108,37 @@ export default {
     this.getUser()
   },
   methods: {
+    async changePwd () {
+      let self = this
+      self.$vux.loading.show({
+        transition: '',
+        text: '处理中...'
+      })
+      await Axios({
+        method: 'put',
+        url: '/api/judge/user/changePwd',
+        params: {
+          password: self.password,
+          password_confirmation: self.password2
+        },
+        withCredentials: false
+      }).then(function (response) {
+        self.$vux.toast.text(response.data.message, 'middle')
+      })
+        .catch(function (error) {
+          self.$vux.toast.text(error.message, 'middle')
+        })
+      self.$vux.loading.hide()
+      self.isChangePassword = false
+      self.password = ''
+      self.password2 = ''
+    },
+    logout () {
+      this.$store.commit('logout')
+      this.$router.push({
+        path: '/login'
+      })
+    },
     getUser () {
       let self = this
       Axios({
@@ -116,13 +188,34 @@ export default {
     height: 100%;
     background-color: #dff3f7;
     position: relative;
+    .user-changeInfo {
+      height: .95rem;
+      line-height: .7rem;
+      width: 100%;
+      position: fixed;
+      top: 1.43rem;
+      left: 0;
+      background-color: #fff;
+      span {
+        margin-left: .4rem;
+        padding-left: .52rem;
+      }
+      .changePwd {
+        background: url("../../static/icon_changepwd.png") left center no-repeat;
+        background-size: .4rem .4rem;
+      }
+      .logout {
+        background: url("../../static/icon_logout.png") left center no-repeat;
+        background-size: .4rem .4rem;
+      }
+    }
     .user-header {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
-      height: 1.75rem;
-      line-height: 1.75rem;
+      height: 1.43rem;
+      line-height: 1.6rem;
       background-color: #fff;
       span {
         margin-right: .38rem;
@@ -143,7 +236,7 @@ export default {
     .vux-tab-wrap {
       position: fixed;
       width: 100%;
-      top: 1.78rem;
+      top: 2.41rem;
       height: .95rem;
       padding: 0;
       .vux-tab-selected {
@@ -161,7 +254,7 @@ export default {
     }
     .vux-slider {
       position: fixed;
-      top: 3.05rem;
+      top: 3.7rem;
       bottom: 0;
       width: 100%;
       .vux-swiper-item {
@@ -175,6 +268,55 @@ export default {
   }
 
 </style>
+
+<style lang="less" scoped>
+  .dialog-demo {
+    .vux-close {
+      position: relative;
+      display: inline-block;
+      vertical-align: middle;
+      color: #999;
+      width: 24px;
+      height: 24px;
+      &:before,
+      &:after {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 11px;
+        width: 24px;
+        height: 1px;
+        background-color: currentColor;
+        transform: rotate(-45deg);
+      }
+      &:after {
+        transform: rotate(45deg);
+      }
+    }
+    .weui-dialog {
+      border-radius: 8px;
+      padding-bottom: 8px;
+    }
+    .dialog-title {
+      line-height: 30px;
+      color: #666;
+    }
+    .img-box {
+      /*height: 350px;*/
+      overflow: hidden;
+    }
+    .vux-close {
+      margin-top: 8px;
+      margin-bottom: 8px;
+    }
+    .weui-btn {
+      width: 100%;
+      border-radius: 0;
+      background-color: #e7252c;
+    }
+  }
+</style>
+
 <style>
   .list-box .vux-tab-container {
     height: .95rem;
@@ -193,4 +335,16 @@ export default {
     height: .95rem;
   }
 
+  .weui-label {
+    font-size: 14px;
+  }
+
+  .weui-label {
+    color: #999;
+  }
+
+  .img-box .weui-cells__title {
+    font-size: 16px;
+    color: #000000;
+  }
 </style>

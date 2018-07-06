@@ -38,8 +38,12 @@ const routes = [
   }
 ]
 
-if (window.localStorage.getItem('token')) {
-  store.commit('login', window.localStorage.getItem('token'))
+if (window.localStorage.getItem('access_token')) {
+  let data = {
+    'access_token': window.localStorage.getItem('access_token'),
+    'access_token_expired_at': window.localStorage.getItem('access_token_expired_at')
+  }
+  store.commit('login', data)
 }
 
 const router = new VueRouter({
@@ -48,7 +52,7 @@ const router = new VueRouter({
 
 router.beforeEach((to, from, next) => {
   if (to.matched.some(r => r.meta.requireAuth)) {
-    if (store.state.token) {
+    if (store.state.access_token) {
       next()
     } else {
       next({

@@ -1,5 +1,19 @@
 <template>
   <div class="content-box">
+    <div v-transfer-dom>
+      <x-dialog v-model="MusicDialog" hide-on-blur
+                :dialog-style="{'max-width': '100%', width: '100%', height: '50%', 'background-color': 'transparent'}">
+        <div>
+          <audio ref="audio" controls="controls" height="100" width="100" autoplay>
+            <source src="" type="audio/mp3"/>
+            <embed height="100" width="100" src=""/>
+          </audio>
+        </div>
+        <br>
+        <br>
+        <x-icon type="ios-close-outline" style="fill:#fff;" @click="MusicDialog = false"></x-icon>
+      </x-dialog>
+    </div>
     <!--预约情况-->
     <div v-show="DialogYyqk" class="dialog-box">
       <div class="box">
@@ -27,7 +41,6 @@
       <div class="box">
         <i class="icon-close" v-on:click="DialogDhly = false"></i>
         <div class="dhly-box">
-          <!--<embed height="100" width="100%" src="https://apple.com/storage/2018/06/29/0852/49e70a9797055a72d200fdb1dd354914.mp3"/>-->
           <ul class="title-box">
             <li>姓名</li>
             <li>录音时间</li>
@@ -37,7 +50,7 @@
             <li v-for="(item,index) in content.recordings" :key="index">
               <span>{{item.name}}</span>
               <span>{{item.time}}</span>
-              <span @click="listenMusic(item.file)"></span>
+              <span @click="listenMusic(axios.defaults.baseURL+item.file)"></span>
             </li>
           </ul>
         </div>
@@ -71,20 +84,36 @@
       </div>
     </div>
     <div class="container-fourth" v-on:click="changeHandlingStatus">
-      房产是否要搬运 （未处理）
+      房产是否要搬运 （{{HandlingStatus[content.by_status]}}）
+    </div>
+    <div v-transfer-dom>
+      <confirm v-model="confirmShow" :hide-on-blur="true" cancel-text="否" confirm-text="是" :close-on-confirm="false"
+               title="是否要进行搬运？" @on-cancel="onCancel" @on-confirm="onConfirm"></confirm>
     </div>
   </div>
 </template>
 
 <script>
 import Axios from '../http/httpAxios'
+import { Confirm, Group, XSwitch, XButton, XDialog, TransferDomDirective as TransferDom } from 'vux'
 
 export default {
+  directives: {
+    TransferDom
+  },
+  components: {
+    Confirm,
+    Group,
+    XSwitch,
+    XButton,
+    XDialog
+  },
   data () {
     return {
+      MusicDialog: false,
+      confirmShow: false,
       DialogYyqk: false,
       DialogDhly: false,
-      isShowMusic: false,
       users: {},
       day: '&',
       HandlingStatus: [
@@ -118,11 +147,8 @@ export default {
   methods: {
     listenMusic (url) {
       let self = this
-      if (self.isShowMusic) {
-        console.log(url)
-      } else {
-        console.log(url)
-      }
+      self.MusicDialog = true
+      self.$refs.audio.src = url
     },
     getContent () {
       let self = this
@@ -140,6 +166,42 @@ export default {
         })
     },
     changeHandlingStatus () {
+      let self = this
+      self.confirmShow = true
+    },
+    onConfirm () {
+      let params = {
+        status: 1
+      }
+      this.changeByStatus(params)
+    },
+    onCancel () {
+      let params = {
+        status: 2
+      }
+      this.changeByStatus(params)
+    },
+    async changeByStatus (params) {
+      let self = this
+      let id = this.$route.params.id
+      self.$vux.loading.show({
+        transition: '',
+        text: '处理中...'
+      })
+      await Axios({
+        method: 'put',
+        url: '/api/judge/content/' + id,
+        params: params,
+        withCredentials: false
+      }).then(function (response) {
+        self.$vux.toast.text(response.data.message, 'middle')
+        self.content = response.data.data
+      })
+        .catch(function (error) {
+          self.$vux.toast.text(error.message, 'middle')
+        })
+      self.$vux.loading.hide()
+      self.confirmShow = false
     }
   }
 }

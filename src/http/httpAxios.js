@@ -4,11 +4,12 @@ import router from '../router'
 
 axios.defaults.timeout = 5000
 axios.defaults.baseURL = 'https://www.wzchangpai.com/'
-
+// axios.defaults.baseURL = 'https://apple.com/'
+// 需要增加accessToken刷新
 axios.interceptors.request.use(
   config => {
-    if (store.state.token) {
-      config.headers.Authorization = `Bearer ${store.state.token}`
+    if (store.state.access_token) {
+      config.headers.Authorization = `Bearer ${store.state.access_token}`
     }
     return config
   },
